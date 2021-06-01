@@ -1,0 +1,61 @@
+pipelines:
+  - name: lab1_backapp_mvn
+    configuration:
+      environmentVariables:
+        readOnly:
+          virtualRepo: urs-mvn
+          trainingPath: SU-301-Practical-Guide-to-Leveraging-JFrog-Pipelines-for-Jenkins-Users
+    steps:
+      - name: lab1_build_backapp_mvn
+        type: MvnBuild
+        configuration:
+          environmentVariables:
+            JFROG_CLI_BUILD_NAME: "{{ gitBranch }}_backapp_mvn"
+            JFROG_CLI_BUILD_URL: "${step_url}${res_lab1_src_code_backapp_mvn_branchName}"
+            JFROG_CLI_LOG_LEVEL: DEBUG
+          mvnCommand: clean package
+          sourceLocation: ${trainingPath}/src/java
+          resolverSnapshotRepo: ${virtualRepo}
+          resolverReleaseRepo: ${virtualRepo}
+          deployerSnapshotRepo: ${virtualRepo}
+          deployerReleaseRepo: ${virtualRepo}
+          forceXrayScan: false
+          autoPublishBuildInfo: true
+          inputResources:
+            - name: lab10_src_code_backapp_mvn
+          outputResources:
+            - name: lab1_bi_backapp_mvn
+          integrations:
+            - name: artifactory_eu
+          execution:
+          onStart:
+            - ls -l ${res_lab1_src_code_backapp_mvn_resourcePath}/${trainingPath}/src/java
+            - jfrog rt c show
+          onFailure:
+            - echo "Not cool"
+          onSuccess:
+            - echo "Yahoo"
+
+      - name: lab1_scan_backapp_mvn
+        type: XrayScan
+        configuration:
+          failOnScan: false
+          inputResources:
+            - name: lab1_bi_backapp_maven
+              trigger: true
+
+      - name: lab1_promote_bi_backapp_mvn
+        type: PromoteBuild
+        configuration:
+          targetRepository: urs-mvn-rc-local
+          includeDependencies: false
+          status: SANDBOX_OK
+          comment: Unit testing and Xray scan passed succesfully
+          copy: false
+          inputResources:
+            - name: lab1_bi_backapp_mvn
+              trigger: true
+          inputSteps:
+            - name: lab1_scan_backapp_mvn
+          outputResources:
+            - name: lab1_bi_backapp_mvn_promoted

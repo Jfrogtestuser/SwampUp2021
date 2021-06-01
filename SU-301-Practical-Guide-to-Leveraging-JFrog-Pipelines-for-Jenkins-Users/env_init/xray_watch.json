@@ -1,0 +1,131 @@
+{
+    "general_data": {
+        "name": "uranus",
+        "description": "This is a new watch created using API V2",
+        "active": true
+    },
+    "project_resources": {
+        "resources": [
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "name": "urs-mvn-dev-local",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "name": "urs-mvn-rc-local",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "name": "urs-mvn-prod-local",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "name": "urs-docker-dev-local",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "name": "urs-docker-rc-local",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "name": "urs-docker-release-local",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "name": "urs-python-dev-local",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "repo_type": "remote",
+                "name": "urs-jcenter-remote",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "repo_type": "remote",
+                "name": "urs-dockerhub-remote",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            },
+            {
+                "bin_mgr_id": "dummy",
+                "type": "repository",
+                "repo_type": "remote",
+                "name": "urs-pypi-remote",
+                "filters": [
+                    {
+                        "type": "regex",
+                        "value": ".*"
+                    }
+                ]
+            }
+        ]
+    },
+    "assigned_policies": [
+        {
+            "name": "global_security",
+            "type": "security"
+        }
+    ],
+    "watch_recipients":[]
+}

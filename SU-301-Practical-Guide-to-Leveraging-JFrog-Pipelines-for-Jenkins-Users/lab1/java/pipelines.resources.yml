@@ -1,0 +1,27 @@
+resources:
+  - name: lab1_src_code_backapp_mvn
+    type: GitRepo
+    configuration:
+      gitProvider: my_github
+      path: cyan21/SwampUp2021
+      branches:
+        include: {{ gitBranch }}
+      files:
+        include: SU-301-Practical-Guide-to-Leveraging-JFrog-Pipelines-for-Jenkins-Users/lab1/java/.*
+      buildOn:
+        pullRequestCreate: true
+        pullRequestClose: true
+        
+  - name: lab1_bi_backapp_mvn
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory_eu
+      buildName: {{ gitBranch }}_backapp_mvn
+      buildNumber: ${run_number}
+    
+  - name: lab1_bi_backapp_mvn_promoted
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory_brexit
+      buildName: {{ gitBranch }}_backapp_mvn
+      buildNumber: ${run_number}
