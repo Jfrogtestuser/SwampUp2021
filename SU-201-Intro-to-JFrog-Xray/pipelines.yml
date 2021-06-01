@@ -27,30 +27,6 @@ resources:
       externalCI: Artifactory
 
 pipelines:
-  - name: Xray step
-    steps: 
-      - name: scan
-        type: XrayScan
-        configuration:
-          #inherits from bash
-          failOnScan: true
-          inputResources:
-            - name:
-              trigger: false
-          outputResources:
-            - name:
-
-        execution:
-          onStart:
-            - echo "preparion for work..."
-            - echo "Prepping build env"
-          onSucces:
-            - echo "Job well done!"
-          onFailure:
-            - echo "uh oh, something went wrong buddy"
-          onComplete: #always
-            - echo "Cleaning up some stuff"
-
   - name: npm_example_pipeline
     configuration:
       environmentVariables:
